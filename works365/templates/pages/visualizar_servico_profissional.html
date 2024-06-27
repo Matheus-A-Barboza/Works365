@@ -30,7 +30,7 @@
             <div class="card-box offer">
                 <form action="{% url 'processar_oferta' servico.id %}" method="post">
                     {% csrf_token %}
-                    <span>R$</span><input type="text" name="oferta" placeholder="Insira sua Oferta">
+                    <span>R$</span><input type="number" value="{{servico.oferta}}" name="oferta" placeholder="Insira sua Oferta">
                     <button type="submit"><i class="fa-solid fa-share"></i></button>
                 </form>
             </div>
