@@ -5,13 +5,6 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib import auth
 from .models import UserProfile, ProfissionalProfile, Servico, Categoria
-from time import sleep
-
-# def enviar_whatsapp(request):
-
-#     profissional = get_object_or_404(Profissional, pk=profissional_id) 
-    
-#     return render(request, 'template.html', {'contato': contato})
 
 def home(request):
     return render(request, 'pages/home.html')
@@ -23,11 +16,24 @@ def register_profissional(request):
         telefone = request.POST.get('telefone')
         categorias = request.POST.get('categorias')
         senha = request.POST.get('senha')
+        confirmar_senha = request.POST.get('confirmar_senha')
         
         profissional = User.objects.filter(username=username).first()
-        
+
         if profissional:
-            return redirect('view_profissional_service')
+            messages.error(request, 'Nome de usuário já está em uso. Por favor, escolha outro!')
+            return redirect('register_profissional')  # Redireciona de volta para o formulário de registro
+
+        # Verifica se o email já está em uso
+        email_exists = User.objects.filter(email=email).exists()
+        if email_exists:
+            messages.error(request, 'Este email já está registrado. Por favor, use outro!')
+            return redirect('register_profissional')  # Redireciona de volta para o formulário de registro
+        
+         # Verifica se as senhas coincidem
+        if senha != confirmar_senha:
+            messages.error(request, 'As senhas não coincidem. Por favor, digite novamente!')
+            return redirect('register_profissional')
         
         profissional = User.objects.create_user(username=username, email=email, password=senha)
         profissional.save()
@@ -35,7 +41,8 @@ def register_profissional(request):
         profissional_profile = ProfissionalProfile(profissional=profissional, telefone=telefone, categorias=categorias)
         profissional_profile.save()
         
-        messages.success(request, 'Registro de profissional realizado com sucesso!')
+        messages.success(request, 'Cadastro de Profissional realizado com sucesso!')
+        messages.success(request, 'Faça login para acessar sua conta.')
         return redirect('login')
 
     return render(request, 'pages/profissional.html')
@@ -46,12 +53,24 @@ def register_usuario(request):
         email = request.POST.get('email')
         telefone = request.POST.get('telefone')
         senha = request.POST.get('senha')
+        confirmar_senha = request.POST.get('confirmar_senha')
 
+        # Verifica se o username já está em uso
         user = User.objects.filter(username=username).first()
-
         if user:
-            return redirect('register_usuario')
+            messages.error(request, 'Nome de usuário já está em uso. Por favor, escolha outro!')
+            return redirect('register_usuario')  # Redireciona de volta para o formulário de registro
+
+        # Verifica se o email já está em uso
+        email_exists = User.objects.filter(email=email).exists()
+        if email_exists:
+            messages.error(request, 'Este email já está registrado. Por favor, use outro!')
+            return redirect('register_usuario')  # Redireciona de volta para o formulário de registro
         
+         # Verifica se as senhas coincidem
+        if senha != confirmar_senha:
+            messages.error(request, 'As senhas não coincidem. Por favor, digite novamente!')
+            return redirect('register_usuario')
         
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
@@ -59,6 +78,8 @@ def register_usuario(request):
         user_profile = UserProfile(user=user, telefone=telefone)
         user_profile.save()
 
+        messages.success(request, 'Cadastro de Usuário realizado com sucesso!')
+        messages.success(request, 'Faça login para acessar sua conta.')
         return redirect('login')
         
     return render(request, 'pages/usuario.html')
@@ -161,11 +182,11 @@ def login(request):
             # Identifique o tipo de perfil
             if hasattr(user, 'userprofile'):
                 login_django(request, user)
-                messages.success(request, 'Login realizado com sucesso!')              
+                # messages.success(request, 'Login realizado com sucesso!')        
                 return redirect('request_user_service')  # Redirecione para o serviço de usuário
             elif hasattr(user, 'profissionalprofile'):
                 login_django(request, user)
-                messages.success(request, 'Login realizado com sucesso!')           
+                # messages.success(request, 'Login realizado com sucesso!')           
                 return redirect('view_profissional_service')  # Redirecione para o serviço profissional
             else:
                 messages.error(request, 'Tipo de usuário não identificado.')

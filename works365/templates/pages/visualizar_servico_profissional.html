@@ -23,15 +23,15 @@
             {% for categoria in servico.categorias.all %}
             <h3>{{ categoria.nome }}</h3>
             {% endfor %}
-            <div class="card-box"><span>Nome do Serviço: </span>{{ servico.nome_servico }}</div>
-            <div class="card-box"><span>Endereço: </span>{{ servico.endereco }}</div>
-            <div class="card-box"><span>Solicitante: </span>{{ servico.solicitante }}</div>
-            <div class="card-box"><span>Descrição: </span>{{ servico.descricao }}</div>
+            <div class="card-box">Nome do Serviço: <span>{{ servico.nome_servico }}</span></div>
+            <div class="card-box">Endereço: <span>{{ servico.endereco }}</span></div>
+            <div class="card-box">Solicitante: <span>{{ servico.solicitante }}</span></div>
+            <div class="card-box">Descrição: <span>{{ servico.descricao }}</span></div>
             <div class="card-box offer">
                 <form action="{% url 'processar_oferta' servico.id %}" method="post">
                     {% csrf_token %}
                     <span>R$</span><input type="text" name="oferta" placeholder="Insira sua Oferta">
-                    <button type="submit"></button><i class="fa-solid fa-share"></i></button>
+                    <button type="submit"><i class="fa-solid fa-share"></i></button>
                 </form>
             </div>
         </div>

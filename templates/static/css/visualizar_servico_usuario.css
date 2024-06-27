@@ -36,9 +36,12 @@ body {
     
 }
 
-.services-container p {
+.services-container .service-wrapper .no-offer {
     text-align: center;
-    font-size: 2rem;
+}
+
+.services-container .service-wrapper .no-service {
+    text-align: center;
 }
 
 .services-container .service-card {
@@ -139,7 +142,7 @@ body {
 
 .services-container .filter {
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 2rem;
 }
 
 .services-container .filter label {
@@ -163,6 +166,23 @@ body {
     right: 10px;
 }
 
+.services-container .filter button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: var(--second-background-color);
+    z-index: -1;
+    transition: .5s;
+}
+
+.services-container .filter button:hover::before {
+    width: 100%;
+}
+
+
 .services-container .filter select {
     background: var(--third-background-color);
     border: none;
@@ -176,6 +196,13 @@ body {
 .services-container .no-offer span {
     font-size: 1.5rem;
     
+}
+
+.horizontal-line {
+    width: 100%;
+    border-bottom: .1rem solid var(--second-text-color);
+    margin-bottom: 3.5rem;
+
 }
 
 footer {

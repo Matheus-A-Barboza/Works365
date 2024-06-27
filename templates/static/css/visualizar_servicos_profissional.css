@@ -80,7 +80,7 @@ body {
     color: var(--second-text-color);
     padding: 5px;
     margin: 0 auto;
-    border-radius: 5px;
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -92,22 +92,33 @@ body {
     cursor: pointer;
 }
 
-.main-container .card-box form {
+.main-container .card .card-box form {
+    width: 100%;
     position: relative;
     display: flex;
+    justify-content: space-around;
+}
+
+.main-container .card .card-box span {
+    font-weight: 500;
 }
 
 .main-container .card .card-box.offer input {
     width: 50%;
-    margin: 0 auto;
+
     background: transparent;
     outline: none;
     border: none;
-    border-bottom: .2rem solid var(--third-background-color) ;
+    border: .2rem solid var(--second-text-color) ;
+    border-radius: 5px;
 }
 
 .main-container .card .card-box.offer input::placeholder {
     color: var(--second-text-color);
+    padding: 3px;
+    text-align: center;
+    opacity: 0.7;
+    font-weight: 500;
 }
 
 .main-container .card .card-box.offer button {
@@ -124,14 +135,17 @@ body {
 
 }
 
-.main-container .card .card-box form button i {
-    font-size: 3rem;
-    padding-right: 0.8rem;
-    margin: auto 0;
+.main-container .card .card-box form button {
+
+    font-size: 1.8rem;
+
+
 }
 
-.main-container .card span {
-     margin-left: 1rem;
+.main-container .card .card-box form span {
+    margin-left: 1rem;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 
 .main-container .card .offer img {

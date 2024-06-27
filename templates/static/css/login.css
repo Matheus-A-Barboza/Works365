@@ -52,6 +52,69 @@ html{
     margin: 3rem 0;
 }
 
+.wrapper .input-login {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+}
+
+.wrapper .input-login p {
+    font-weight: 500;
+}
+
+.wrapper .input-login a {
+    margin: 0 5px;
+    color: var(--second-background-color);
+    transition: .4s;
+}
+
+.wrapper .input-login a:hover {
+    color: var(--second-text-color);
+}
+
+.cadastro-opcoes {
+    display: none;
+    position: absolute;
+    top: -100%;
+    left: 102%;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    width: 200px;
+}
+
+.cadastro-opcoes ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cadastro-opcoes ul li {
+    margin-bottom: 5px;
+}
+
+.cadastro-opcoes ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.input-login {
+    position: relative;
+    display: inline-block;
+}
+
+.input-login a {
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.input-login a:hover {
+    text-decoration: underline;
+}
+
 .input-box input {
     width: 100%;
     height: 100%;
@@ -129,3 +192,22 @@ small {
     color: #fff;
 }
 
+.messages {
+    font-size: 1.4rem;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 3.5rem;
+}
+.messages li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.messages .success {
+    background-color: #d4edda;
+    color: #155724;
+}
+.messages .error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
