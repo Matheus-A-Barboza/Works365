@@ -30,38 +30,39 @@
         </form>
 
         {% for servico in servicos %}
-            <div class="service-card">
-                <h3>{{ servico.nome_servico }}</h3>
-                <div><span>Endereço:</span> {{ servico.endereco }}</div>
-                <div><span>Nome do Solicitante:</span> {{ servico.solicitante }}</div>
-                <div><span>Descrição:</span> {{ servico.descricao }}</div>
-                {% for categoria in servico.categorias.all %}
-                <div><span>Categoria:</span> {{ categoria.nome }}</div>
-                {% endfor %}
-            </div>
+            <div class="service-wrapper">
+                <div class="service-card">
+                    <h3>{{ servico.nome_servico }}</h3>
+                    <div><span>Endereço:</span> {{ servico.endereco }}</div>
+                    <div><span>Nome do Solicitante:</span> {{ servico.solicitante }}</div>
+                    <div><span>Descrição:</span> {{ servico.descricao }}</div>
+                    {% for categoria in servico.categorias.all %}
+                    <div><span>Categoria:</span> {{ categoria.nome }}</div>
+                    {% endfor %}
+                </div>
 
-            {% if servico.oferta %}
-                <div class="offer">
-                    <div class="details">
-                        <i class="fa-solid fa-user"></i>
-                        <span>{{ request.session.profissional_nome }} | Oferta: $ {{ servico.oferta }}</span>
+                {% if servico.oferta %}
+                    <div class="offer">
+                        <div class="details">
+                            <i class="fa-solid fa-user"></i>
+                            <span>{{ request.session.profissional_nome }} | Oferta: $ {{ servico.oferta }}</span>
+                        </div>
+                        <a href="https://api.whatsapp.com/send?phone=5548992139839"><button class="btn-accept">Aceitar
+                                Oferta</button></a>
                     </div>
-                    <a href="https://api.whatsapp.com/send?phone=5548992139839"><button class="btn-accept">Aceitar
-                            Oferta</button></a>
-                </div>
-            {% else %}
-                <div class="no-offer">
-                    <span>Nenhuma oferta encontrada</span>
-                </div>
-            {% endif %}
+                {% else %}
+                    <div class="no-offer">
+                        <span>Nenhuma oferta encontrada</span>
+                    </div>
+                {% endif %}
             </div>
-            {% empty %}
+        {% empty %}
             <div class="no-service">
                 <span>Nenhum serviço encontrado</span>
             </div>
         {% endfor %}
 
-        
+    </div>
 
     <footer>
         <p>&copy; 365 WORKS</p>
